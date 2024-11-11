@@ -9,11 +9,7 @@ export class CacheService implements OnModuleInit, OnModuleDestroy {
     constructor(
         private readonly configService: ConfigService,
     ) {
-        this.redisClient = new Redis(this.configService.get<string>("REDIS_URL"), {
-            host: this.configService.get<string>("REDIS_HOST"),
-            port: this.configService.get<number>("REDIS_PORT"),
-            password: this.configService.get<string>("REDIS_PASSWORD"),
-        });
+        this.redisClient = new Redis(this.configService.get<string>("REDIS_URL"));
     }
 
     onModuleInit(): void {
