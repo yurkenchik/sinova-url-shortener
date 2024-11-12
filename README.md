@@ -26,6 +26,16 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Cloning repository
+
+```bash
+# development
+$ git clone https://github.com/yurkenchik/sinova-url-shortener.git
+
+# enter the directory
+$ cd sinov-url-shortener
+```
+
 ## Installation
 
 ```bash
@@ -48,15 +58,18 @@ $ yarn run start:prod
 ## Test
 
 ```bash
-# unit tests
+# unit test
 $ yarn run test
 
-# e2e tests
+# e2e test
 $ yarn run test:e2e
 
 # test coverage
 $ yarn run test:cov
 ```
+
+## Swagger
+https://sinova-url-shortener-production.up.railway.app/api/docs
 
 ## Support
 
