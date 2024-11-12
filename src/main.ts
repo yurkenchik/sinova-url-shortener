@@ -9,6 +9,7 @@ async function bootstrap() {
     const swaggerConfig = new DocumentBuilder()
         .setTitle("Url Shortener API")
         .setVersion("1.0")
+        .addServer("/api")
         .build();
 
     const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
