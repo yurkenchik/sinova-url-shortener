@@ -1,4 +1,4 @@
-import {Injectable, OnModuleDestroy, OnModuleInit} from "@nestjs/common";
+import {ForbiddenException, Injectable, OnModuleDestroy, OnModuleInit} from "@nestjs/common";
 import Redis from "ioredis";
 import {ConfigService} from "@nestjs/config";
 
@@ -38,7 +38,20 @@ export class CacheService implements OnModuleInit, OnModuleDestroy {
         return this.redisClient.get(key);
     }
 
-    async delete(key: string): Promise<void> {
-        await this.redisClient.del(key);
+    async rateLimit(
+        ipAddress: string,
+        limit: number = 10,
+        duration: number = 60
+    ): Promise<void> {
+        const key = `rate-limit:${ipAddress}`;
+        const requests = await this.redisClient.incr(key);
+
+        if (requests === 1) {
+            await this.redisClient.expire(key, duration);
+        }
+
+        if (requests > limit) {
+            throw new ForbiddenException(`Rate limit exceeded. Try again later.`);
+        }
     }
 }
